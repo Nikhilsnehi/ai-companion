@@ -1,22 +1,17 @@
 from dotenv import load_dotenv
-from openai import OpenAI
+from ai import shoot
 
 load_dotenv()
 
-client = OpenAI()
-
-print("we movin bby")
+print("we here")
 
 while True:
     question = input("me: ")
 
     if question.lower() == "exit":
-        print("we out peace")
+        print("im out peace")
         break
 
-    response = client.responses.create(
-        model="gpt-5.6-luna",
-        input=question
-    )
+    answer = shoot(question)
 
-    print("AI:", response.output_text)
+    print("AI:", answer)
