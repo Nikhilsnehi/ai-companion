@@ -1,4 +1,3 @@
-from dotenv import load_dotenv
 from ai import ask_ai, ask_about_screen
 from screen import capture_screen
 
