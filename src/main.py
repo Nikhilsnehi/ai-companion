@@ -4,6 +4,8 @@ from screen import capture_screen
 
 print("AI Companion is running.")
 
+screen_words = ["look", "screen", "watching", "see", "happening"]
+
 while True:
     question = input("me: ")
 
@@ -11,9 +13,9 @@ while True:
         print("AI Companion shutting down.")
         break
 
-    if question.lower() == "look":
+    if any(word in question.lower() for word in screen_words):
         capture_screen()
-        answer = ask_about_screen("What am I looking at?")
+        answer = ask_about_screen(question)
     else:
         answer = ask_ai(question)
 
