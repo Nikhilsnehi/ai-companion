@@ -1,9 +1,26 @@
 from mss import MSS, tools
+import pygetwindow as gw
 
 
 def capture_screen():
+    window = gw.getActiveWindow()
+
+    if window is None:
+        print("No active window found.")
+        return
+
+    left = window.left
+    top = window.top
+    width = window.width
+    height = window.height
+
     with MSS() as sct:
-        screenshot = sct.grab(sct.monitors[1])
+        screenshot = sct.grab({
+            "left": left,
+            "top": top,
+            "width": width,
+            "height": height
+        })
 
         tools.to_png(
             screenshot.rgb,
@@ -11,4 +28,4 @@ def capture_screen():
             output="screen.png"
         )
 
-    return "screen.png"
+    print(f"Captured: {window.title}")
