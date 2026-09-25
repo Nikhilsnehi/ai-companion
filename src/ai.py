@@ -1,10 +1,10 @@
-from dotenv import load_dotenv
 from openai import OpenAI
 import base64
 
-load_dotenv()
-
-client = OpenAI()
+client = OpenAI(
+    base_url="http://localhost:11434/v1",
+    api_key="ollama"
+)
 
 previous_response_id = None
 
@@ -13,7 +13,7 @@ def ask_ai(question):
     global previous_response_id
 
     response = client.responses.create(
-        model="gpt-5.6-luna",
+        model="llama3.2:3b",
         instructions="""
         You are an AI companion called Companion.
 
@@ -40,7 +40,7 @@ def ask_about_screen(question):
         ).decode("utf-8")
 
     response = client.responses.create(
-        model="gpt-5.6-luna",
+        model="llama3.2:3b",
         instructions="""
         You are an AI companion watching the user's screen.
         Describe what is actually visible in the image.
